@@ -7,6 +7,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --text: #2c3e50;
+            --bg: #ecf0f1;
+            --card-bg: #ffffff;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,30 +23,37 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body, html {
-            height: 100%;
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
             overflow-x: hidden;
-            background-color: #0a192f;
-            color: #f4f4f4;
+            position: relative;
         }
 
-        /* Techie Loader Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Techie Animation Loader */
         .techie-loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0a192f, #112240);
+            background: linear-gradient(135deg, #000, #112240);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            color: #64ffda;
-            font-family: 'Courier New', Courier, monospace;
         }
 
         .techie-box {
+            color: #0f0; /* Matrix green color */
+            font-family: 'Courier New', Courier, monospace;
             background: rgba(17, 34, 64, 0.8);
             padding: 30px;
             border-radius: 10px;
@@ -68,11 +84,10 @@
         .techie-line:nth-child(5) { animation-delay: 4.5s; }
         .techie-line:nth-child(6) { animation-delay: 5.5s; }
         .techie-line:nth-child(7) { animation-delay: 6.5s; }
-        .techie-line:nth-child(8) { animation-delay: 7.5s; }
 
         #loading-line {
             color: #ff6b6b;
-            animation-delay: 8.5s;
+            animation-delay: 7.5s;
         }
 
         .enter-btn {
@@ -93,67 +108,164 @@
             transform: scale(1.05);
         }
 
+        /* Matrix Rain Effect */
         #matrix-rain {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: rgba(0, 0, 0, 0.2);
             z-index: -1;
             pointer-events: none;
         }
 
-        #main-content {
-            display: none;
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            z-index: 1;
+        }
+
+        .profile-info h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 0;
             position: relative;
             z-index: 10;
-            background-color: rgba(10, 25, 47, 0.9);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Rest of your previous styles for sections, headers, etc. */
-        header {
-            text-align: center;
-            padding: 50px 0;
-        }
-
-        header h1 {
-            color: #64ffda;
-            font-size: 2.5em;
         }
 
         .section-title {
-            color: #64ffda;
             text-align: center;
-            margin: 40px 0;
-            font-size: 2.2em;
-        }
-
-        section {
             margin-bottom: 40px;
-        }
-
-        .skills-grid, .experience-card, .education-card, .activities-card {
-            background-color: rgba(45, 45, 80, 0.5);
-            padding: 20px;
+            color: var(--primary);
+            font-size: 2.5em;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
             border-radius: 10px;
-            margin-bottom: 20px;
         }
 
-        h3 {
-            color: #64ffda;
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 10px auto;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        /* Experience Cards */
+        .experience-card {
+            background: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+        }
+
+        .experience-card h3 {
+            color: var(--primary);
             margin-bottom: 10px;
         }
 
-        ul {
-            color: #c0c0c0;
-            padding-left: 20px;
+        .experience-card h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Education Section */
+        .education-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .education-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Activities Section */
+        .activities-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-info h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -177,35 +289,57 @@
     <canvas id="matrix-rain"></canvas>
 
     <!-- Main Resume Content (Initially Hidden) -->
-    <div id="main-content">
+    <div id="main-content" style="display:none;">
         <header>
             <div class="container">
-                <h1>PRIYADHARSAN JAYASEELAN</h1>
-                <p>Software Engineering Student | Tech Innovator</p>
+                <div class="profile-info">
+                    <h1 data-aos="fade-down">PRIYADHARSAN JAYASEELAN</h1>
+                    <div class="contact-info" data-aos="fade-up">
+                        <p>📍 Kent, Ohio</p>
+                        <p>📞 +1 (234) 296-2703</p>
+                        <p>✉️ priyadharsanjayaseelan@gmail.com</p>
+                    </div>
+                </div>
             </div>
         </header>
 
         <section id="skills">
             <div class="container">
-                <h2 class="section-title">Skills & Expertise</h2>
+                <h2 class="section-title" data-aos="fade-up">Skills & Expertise</h2>
                 <div class="skills-grid">
-                    <div class="skill-category">
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
                         <h3>Programming Languages</h3>
-                        <ul>
-                            <li>C++</li>
-                            <li>Python</li>
-                            <li>SQL</li>
-                        </ul>
+                        <div class="skill-item">
+                            <p>C++</p>
+                            <div class="skill-progress">
+                                <div class="progress-bar" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <p>Python</p>
+                            <div class="skill-progress">
+                                <div class="progress-bar" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <p>SQL</p>
+                            <div class="skill-progress">
+                                <div class="progress-bar" data-width="80"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="skill-category">
+
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
                         <h3>Development Tools</h3>
                         <ul>
                             <li>VS Code</li>
                             <li>Xcode</li>
+                            <li>Python IDLE</li>
                             <li>MySQL Workbench</li>
                         </ul>
                     </div>
-                    <div class="skill-category">
+
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
                         <h3>Technical Skills</h3>
                         <ul>
                             <li>Database Management</li>
@@ -219,19 +353,21 @@
 
         <section id="experience">
             <div class="container">
-                <h2 class="section-title">Work Experience</h2>
-                <div class="experience-card">
+                <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
+                
+                <div class="experience-card" data-aos="fade-up">
                     <h3>Culinary Operational Assistant</h3>
-                    <p>Kent State University | Aug 2024 - Present</p>
+                    <h4>Kent State University | Aug 2024 - Present</h4>
                     <ul>
                         <li>Optimized staff scheduling using SQL queries</li>
                         <li>Developed custom data structures for inventory management</li>
                         <li>Improved operational efficiency by 20%</li>
                     </ul>
                 </div>
-                <div class="experience-card">
+
+                <div class="experience-card" data-aos="fade-up" data-aos-delay="100">
                     <h3>Technical Lab Support Assistant</h3>
-                    <p>Aristo Public School | Aug 2022 - Feb 2023</p>
+                    <h4>Aristo Public School | Aug 2022 - Feb 2023</h4>
                     <ul>
                         <li>Provided technical support and troubleshooting</li>
                         <li>Streamlined lab operations</li>
@@ -243,10 +379,11 @@
 
         <section id="education">
             <div class="container">
-                <h2 class="section-title">Education</h2>
-                <div class="education-card">
+                <h2 class="section-title" data-aos="fade-up">Education</h2>
+                
+                <div class="education-card" data-aos="fade-up">
                     <h3>Bachelor of Computer Science</h3>
-                    <p>Kent State University | GPA: 3.77 | Aug 2023 - May 2027</p>
+                    <h4>Kent State University | GPA: 3.77 | Aug 2023 - May 2027</h4>
                     <p>Relevant Coursework:</p>
                     <ul>
                         <li>Advanced C++ Projects</li>
@@ -260,10 +397,11 @@
 
         <section id="activities">
             <div class="container">
-                <h2 class="section-title">Activities</h2>
-                <div class="activities-card">
+                <h2 class="section-title" data-aos="fade-up">Activities</h2>
+                
+                <div class="activities-card" data-aos="fade-up">
                     <h3>ALD Honor Society Member</h3>
-                    <p>Kent State University | Dec 2023 - Present</p>
+                    <h4>Kent State University | Dec 2023 - Present</h4>
                     <ul>
                         <li>Led bi-monthly mentoring initiatives</li>
                         <li>Increased Honor Society participation by 30%</li>
@@ -276,66 +414,47 @@
 
     <script>
         // Matrix Rain Effect
-        const canvas = document.getElementById('matrix-rain');
-        const ctx = canvas.getContext('2d');
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$%&*#^!';
-        const fontSize = 16;
-
+        const canvas = document.getElementById("matrix-rain");
+        const ctx = canvas.getContext("2d");
+        
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const drops = [];
-        for (let i = 0; i < canvas.width / fontSize; i++) {
-            drops[i] = Math.random() * canvas.height;
-        }
-
-        function drawMatrixRain() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; 
+        const cols = Math.floor(canvas.width / 20) + 1;
+        const ypos = Array(cols).fill(0);
+        
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#0F0'; 
-            ctx.font = `${fontSize}px monospace`;
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = characters[Math.floor(Math.random() * characters.length)];
-                ctx.fillText(text, i * fontSize, drops[i]);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
+            ctx.fillStyle = "#0f0";
+            ctx.font = "20px monospace";
+            
+            for (let i = 0; i < cols; i++) {
+                const text = String.fromCharCode(Math.random() * 128);
+                ctx.fillText(text, i * 20, ypos[i] * 20);
+                if (ypos[i] * 20 > canvas.height && Math.random() > 0.975) {
+                    ypos[i] = 0;
                 }
-
-                drops[i] += fontSize;
+                ypos[i]++;
             }
         }
 
-        setInterval(drawMatrixRain, 35);
+        setInterval(draw, 35);
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            drops.length = 0;
-            for (let i = 0; i < canvas.width / fontSize; i++) {
-                drops[i] = Math.random() * canvas.height;
-            }
-        });
+        // Loader animation & transition to resume content
+        const techieLoader = document.getElementById("techie-loader");
+        const enterBtn = document.getElementById("enter-btn");
+        const mainContent = document.getElementById("main-content");
 
-        // Loader Management
-        const loader = document.getElementById('techie-loader');
-        const enterBtn = document.getElementById('enter-btn');
-        const mainContent = document.getElementById('main-content');
-
-        // Show Enter button after typing animation
+        // Wait for loader animation to finish before transitioning
         setTimeout(() => {
-            enterBtn.style.display = 'block';
-        }, 9000);
+            enterBtn.style.display = "block"; // Show the "Enter" button
+        }, 7500);
 
-        // Enter button click handler
-        enterBtn.addEventListener('click', () => {
-            loader.style.opacity = '0';
-            setTimeout(() => {
-                loader.style.display = 'none';
-                mainContent.style.display = 'block';
-            }, 1000);
+        enterBtn.addEventListener("click", () => {
+            techieLoader.style.display = "none"; // Hide loader
+            mainContent.style.display = "block"; // Show resume content
+            AOS.init(); // Reinitialize animations
         });
     </script>
 </body>
